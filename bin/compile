@@ -92,7 +92,7 @@ mkdir -p "$CACHE_DIR"
 cd "$CACHE_DIR"
 
 # Make sure we have an appropriate Rust toolchain installed.
-if [ -d "$CARGO_HOME" ]; then
+if [ -d "$CARGO_HOME" && false ]; then
     echo "-----> Checking for new releases of Rust $VERSION channel"
     # It's possible that $VERSION has changed, or the `stable` channel has updated.
     rustup self update
@@ -134,8 +134,8 @@ if [ $RUST_SKIP_BUILD -ne 1 ]; then
   cp -r $CARGO_TARGET_DIR/release target/release
   cp -r ~/.rustup ./rustup
   mkdir -p cargo
-  cp -r ~/.cargo/env ./cargo/env
-  cp -r ~/.cargo/bin ./cargo/bin
+  cp -r $CARGO_HOME/env ./cargo/env
+  cp -r $CARGO_HOME/bin ./cargo/bin
 else
   echo "-----> Skipping Cargo build"
 fi
